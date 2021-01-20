@@ -1,1 +1,0 @@
-# Sakima-Kentaro.github.io
