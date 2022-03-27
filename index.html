@@ -7,8 +7,8 @@
 </html>
 <body>
    <div id="app">
-       <input v-model="number">
-       <button v-on:click="getnumber">素因数分解</button>
+       <input v-model="number" type="tel">
+       <button v-on:click="check">素因数分解</button>
        <p>{{result}}</p>
    </div>
 
@@ -22,10 +22,12 @@
             result:"",
       },
      methods:{
-         getnumber:function(){
-                
-                 
-                    this.result="";
+         getnumber:function()
+         {  
+            
+            if(this.number>0&&this.result!="値が不正です")
+                    {
+                        this.result="";
                     if(this.number==2||this.number==1){
                      this.result=this.number+"^1";
                  }
@@ -33,7 +35,7 @@
                      var rnumber=this.number;
                      var count=0;
                      for(var i=2;i<=this.number;i++){
-                         
+                           
                          
                             if(rnumber%i==0){
                              rnumber=rnumber/i;
@@ -42,14 +44,20 @@
                              i=i-1;
                          }
                          else{
-                             if(count!=0){
+                             if(count!=0)
+                             {
                                 this.result=this.result+i+"^"+count+"*";
                              count=0;
-                             if(rnumber==1){
+                             if(rnumber==1)
+                             {
                                 break;
                              }
                              }
-                            
+                            if(count==0&&Math.sqrt(rnumber)<i)
+                            {
+                                this.result=this.result+rnumber+"^1";
+                                break;
+                            }
                          }
                          
                              
@@ -60,10 +68,31 @@
                  
                 
              
+                    }
+                    
+                 
+                   console.log(this.result);
          },
          test:function(){
             
+         },
+         check:function()
+         {
+            var array=this.number.split('');
+            console.log(this.number);
+                   for(var i=0;i<array.length;i++)
+                   {
+                       var x="0123456789"
+                       if(x.indexOf(array[i])<0)
+                       {    
+                            this.result="値が不正です"
+                             break;
+                       }
+                   }
+
+                   this.getnumber();
          }
+         
 
      }
 
