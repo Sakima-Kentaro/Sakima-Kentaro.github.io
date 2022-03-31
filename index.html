@@ -88,6 +88,10 @@
                             this.result="値が不正です"
                              break;
                        }
+                       if(i==array.length-1&&this.result=="値が不正です")
+                       {
+                         this.result="";
+                       }
                    }
 
                    this.getnumber();
